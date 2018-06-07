@@ -19,6 +19,7 @@ public class Course {
 
     /**
      * 上课时间
+     *
      */
     private Date date;
 
