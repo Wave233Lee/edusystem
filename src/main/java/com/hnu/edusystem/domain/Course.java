@@ -18,7 +18,7 @@ public class Course {
     private String name;
 
     /**
-     * 上课时间
+     * 上课时间test
      *
      */
     private Date date;
