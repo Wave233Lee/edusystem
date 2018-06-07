@@ -108,16 +108,16 @@ public class StudentController {
      *
      * @param page
      * @param size
-     * @param sortfielName
+     * @param sortFieldName
      * @param asc
      * @return
      */
     @RequestMapping(value = "/getAllByPage")
     public Result<Page<Student>> getAllPage(@RequestParam(value = "page" , defaultValue = "0" ) Integer page,
                                             @RequestParam(value = "size" , defaultValue = "10") Integer size,
-                                            @RequestParam(value = "sortFielName" , defaultValue = "id") String sortfielName,
+                                            @RequestParam(value = "sortFieldName" , defaultValue = "id") String sortFieldName,
                                             @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
-        return ResultUtil.success(studentService.findAllByPage(page , size , sortfielName ,asc));
+        return ResultUtil.success(studentService.findAllByPage(page , size , sortFieldName ,asc));
     }
 
     /**
@@ -126,7 +126,7 @@ public class StudentController {
      * @param name
      * @param page
      * @param size
-     * @param sortFielName
+     * @param sortFieldName
      * @param asc
      * @return
      */
@@ -134,9 +134,9 @@ public class StudentController {
     public Result<Page<Student>> getByNameLikeByPage(@RequestParam(value = "name" , defaultValue = "") String name,
                                                      @RequestParam(value = "page" , defaultValue = "0") Integer page,
                                                      @RequestParam(value = "size" , defaultValue = "10") Integer size,
-                                                     @RequestParam(value = "sortFielName" , defaultValue = "id") String sortFielName,
+                                                     @RequestParam(value = "sortFieldName" , defaultValue = "id") String sortFieldName,
                                                      @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
-        return ResultUtil.success(studentService.findBynameByPage(name , page, size , sortFielName , asc));
+        return ResultUtil.success(studentService.findBynameByPage(name , page, size , sortFieldName , asc));
     }
 }
 
