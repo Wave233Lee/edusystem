@@ -23,8 +23,6 @@ public class Course {
      */
     private Date date;
 
-    private Integer Fin;
-
     /**
      * 课程上限人数
      */
