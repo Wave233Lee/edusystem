@@ -77,7 +77,7 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/deleteByIdBatch")
-    public Result<Object> deleteByIdbatch(@RequestBody Collection<Student> students) {
+    public Result<Object> deleteByIdBatch(@RequestBody Collection<Student> students) {
         studentService.deleteInBatch(students);
         return ResultUtil.success();
     }
