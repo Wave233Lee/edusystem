@@ -116,9 +116,9 @@ public class CourseController {
      */
     @RequestMapping(value = "/getAllByPage")
     public Result<Page<Course>> getAllByPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                            @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                            @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
-                                            @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
+                                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                             @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
+                                             @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
 
         return ResultUtil.success(courseService.findAllByPage(page, size, sortFieldName, asc));
     }
@@ -135,10 +135,10 @@ public class CourseController {
      */
     @RequestMapping(value = "/getByNameLikeByPage")
     public Result<Page<Course>> getByNameLikeByPage(@RequestParam(value = "name", defaultValue = "") String name,
-                                                       @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                       @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                                       @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
-                                                       @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
+                                                    @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                    @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
+                                                    @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
 
         return ResultUtil.success(courseService.findByNameLikeByPage(name, page, size, sortFieldName, asc));
     }
