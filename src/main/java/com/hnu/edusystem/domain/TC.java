@@ -3,17 +3,12 @@ package com.hnu.edusystem.domain;
 import javax.persistence.*;
 
 @Entity
+@IdClass(value = TCPK.class)
 public class TC {
-    /**
-     * 主键id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
     /**
      * 教工号
      */
+    @Id
     @ManyToOne(targetEntity = Teacher.class)
     @JoinColumn(referencedColumnName = "id")
     private String tid;
@@ -28,6 +23,7 @@ public class TC {
     /**
      * 课程号
      */
+    @Id
     @ManyToOne(targetEntity = Course.class)
     @JoinColumn(referencedColumnName = "id")
     private String cid;
