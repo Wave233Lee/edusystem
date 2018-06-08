@@ -24,7 +24,7 @@ public class HandleExceptions {
 		} else if (e instanceof MethodArgumentTypeMismatchException) {
 			logger.error("【系统异常】 {}", e.getMessage());
 			// 参数类型不匹配
-			return ResultUtil.error(new EduException(EnumExceptions.ARGU_MISMATCH_EXCEPTION));
+			return ResultUtil.error(new EduException(EnumExceptions.ARGB_MISMATCH_EXCEPTION));
 		} else {
 			logger.error("【系统异常】 {}", e.getMessage());
 
@@ -32,7 +32,7 @@ public class HandleExceptions {
 				// 请求方法不匹配
 				return ResultUtil.error(new EduException(EnumExceptions.REQUEST_METHOD));
 			} else {
-				return ResultUtil.error(new EduException(EnumExceptions.UNKOWN_ERROR));
+				return ResultUtil.error(new EduException(EnumExceptions.UNKNOWN_ERROR));
 			}
 		}
 	}

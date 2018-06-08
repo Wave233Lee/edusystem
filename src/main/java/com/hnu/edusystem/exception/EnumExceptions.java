@@ -7,13 +7,15 @@ package com.hnu.edusystem.exception;
  *
  */
 public enum EnumExceptions {
-	UNKOWN_ERROR(-1, "未知错误"),
+	UNKNOWN_ERROR(-1, "未知错误"),
 	SUCCESS(0, "操作成功"),
 	ADD_FAILED_DUPLICATE(1, "新增失败, 主键已存在"),
 	UPDATE_FAILED_NOT_EXIST(2, "更新失败, 不存在"),
 	DELETE_FAILED_NOT_EXIST(3, "删除失败, 不存在"),
 	REQUEST_METHOD(4, "请求方法不匹配"),
-	ARGU_MISMATCH_EXCEPTION(5, "参数类型不匹配错误, 请检查"),
+	ARGB_MISMATCH_EXCEPTION(5, "参数类型不匹配错误, 请检查"),
+	ID_NOT_EXIST(6,"账号不存在"),
+    PASSWORD_ERROR(7,"密码错误"),
 	;
 
 	/** 编码 */
@@ -27,7 +29,7 @@ public enum EnumExceptions {
 	 * @param code
 	 * @param message
 	 */
-	private EnumExceptions(Integer code, String message) {
+    EnumExceptions(Integer code, String message) {
 		this.code = code;
 		this.message = message;
 	}

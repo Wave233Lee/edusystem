@@ -27,6 +27,17 @@ public class LoginController {
     private LoginService loginService;
 
     /**
+     * 登陆验证
+     */
+    @RequestMapping(value = "/confirm")
+    public Result<Login> loginConfirm(@Valid Login login, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+        }
+        return ResultUtil.success(loginService.loginConfirm(login));
+    }
+
+    /**
      * 新增
      *
      * @param login
@@ -36,7 +47,7 @@ public class LoginController {
     public Result<Login> add(@Valid Login login, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(loginService.save(login));
@@ -52,7 +63,7 @@ public class LoginController {
     public Result<Login> update(@Valid Login login, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(loginService.update(login));

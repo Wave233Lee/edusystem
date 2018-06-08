@@ -24,6 +24,21 @@ public class LoginService {
     private LoginRepository loginRepository;
 
     /**
+     * 登陆认证
+     */
+    public Login loginConfirm(Login login){
+
+        if(login.getId() == null || loginRepository.findOne(login.getId()) == null ){
+            throw new EduException(EnumExceptions.ID_NOT_EXIST);
+        }
+        else if(!login.getPassword().equals(loginRepository.findOne(login.getId()).getPassword())){
+            throw new EduException(EnumExceptions.PASSWORD_ERROR);
+        }
+
+        return login;
+    }
+
+    /**
      * 新增
      *
      * @param login
@@ -116,7 +131,7 @@ public class LoginService {
             sortFieldName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);
         } else {

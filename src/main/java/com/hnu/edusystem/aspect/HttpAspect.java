@@ -22,7 +22,7 @@ public class HttpAspect {
     /**
      * 拦截
      */
-    @Pointcut("execution(public * com.xplusplus.security.controller.*.*(..))")
+    @Pointcut("execution(public * com.hnu.edusystem.controller.*.*(..))")
     public void log() {
     }
 

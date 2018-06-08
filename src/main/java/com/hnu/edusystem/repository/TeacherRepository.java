@@ -16,5 +16,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
      * @param pageable
      * @return
      */
-    public Page<Teacher> findByNameLike(String name, Pageable pageable);
+    Page<Teacher> findByNameLike(String name, Pageable pageable);
 }

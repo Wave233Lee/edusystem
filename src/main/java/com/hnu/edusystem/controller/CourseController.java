@@ -37,7 +37,7 @@ public class CourseController {
     public Result<Course> add(@Valid Course course, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(courseService.save(course));
@@ -53,7 +53,7 @@ public class CourseController {
     public Result<Course> update(@Valid Course course, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(courseService.update(course));

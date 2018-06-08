@@ -18,10 +18,15 @@ public class Course {
     private String name;
 
     /**
-     * 上课时间test
+     * 上课星期数
      *
      */
-    private Date date;
+    private String day;
+
+    /**
+     * 上课节次
+     */
+    private Integer session;
 
     /**
      * 课程上限人数
@@ -49,12 +54,20 @@ public class Course {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDay() {
+        return day;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public Integer getSession() {
+        return session;
+    }
+
+    public void setSession(Integer session) {
+        this.session = session;
     }
 
     public Integer getNum() {
@@ -78,7 +91,8 @@ public class Course {
         return "Course{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", date=" + date +
+                ", day='" + day + '\'' +
+                ", session=" + session +
                 ", num=" + num +
                 ", location='" + location + '\'' +
                 '}';
