@@ -131,10 +131,6 @@ public class LoginService {
             // 如果不存在就设置为id
             sortFieldName = "id";
         }
-
-        if(page == null){
-            page = 0;
-        }
         Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);

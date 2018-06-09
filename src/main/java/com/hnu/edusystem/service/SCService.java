@@ -123,13 +123,10 @@ public class SCService {
         try {
             SC.class.getDeclaredField(sortFieldName);
         } catch (Exception e) {
-            // 如果不存在就设置为id
-            sortFieldName = "id";
+            // 如果不存在就设置为cid
+            sortFieldName = "cid";
         }
 
-        if(page == null){
-            page = 0;
-        }
         Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);

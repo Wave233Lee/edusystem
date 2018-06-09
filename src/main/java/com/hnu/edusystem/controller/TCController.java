@@ -128,7 +128,7 @@ public class TCController {
     @RequestMapping(value = "/getAllByPage")
     public Result<Page<TC>> getAllByPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                         @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
+                                         @RequestParam(value = "sortFieldName", defaultValue = "cid") String sortFieldName,
                                          @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
 
         return ResultUtil.success(tcService.findAllByPage(page, size, sortFieldName, asc));

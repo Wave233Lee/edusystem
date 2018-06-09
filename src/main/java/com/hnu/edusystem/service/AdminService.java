@@ -116,9 +116,6 @@ public class AdminService {
             sortFieldName = "id";
         }
 
-        if(page == null){
-            page = 0;
-        }
         Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);

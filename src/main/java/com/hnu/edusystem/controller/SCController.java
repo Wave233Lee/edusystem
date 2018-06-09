@@ -127,7 +127,7 @@ public class SCController {
     @RequestMapping(value = "/getAllByPage")
     public Result<Page<SC>> getAllByPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                         @RequestParam(value = "sortFieldName", defaultValue = "id") String sortFieldName,
+                                         @RequestParam(value = "sortFieldName", defaultValue = "cid") String sortFieldName,
                                          @RequestParam(value = "asc", defaultValue = "1") Integer asc) {
 
         return ResultUtil.success(scService.findAllByPage(page, size, sortFieldName, asc));
