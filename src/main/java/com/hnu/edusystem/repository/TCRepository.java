@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date: 2018/6/5 22:12
  */
 public interface TCRepository extends JpaRepository<TC, Integer> {
+    TC findByTid(String sid);
+    TC findByCid(String cid);
+    TC findByTidAndCid(String sid, String cid);
 }

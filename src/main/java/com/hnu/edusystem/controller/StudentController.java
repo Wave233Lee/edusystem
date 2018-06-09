@@ -37,7 +37,7 @@ public class StudentController {
     @RequestMapping(value = "/add")
     public Result<Student> add(@Valid Student student ,BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(studentService.save(student));
@@ -53,7 +53,7 @@ public class StudentController {
     @RequestMapping(value = "/update")
     public Result<Student> update(@Valid Student student , BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
         return ResultUtil.success(studentService.update(student));
     }
@@ -136,7 +136,7 @@ public class StudentController {
                                                      @RequestParam(value = "size" , defaultValue = "10") Integer size,
                                                      @RequestParam(value = "sortFieldName" , defaultValue = "id") String sortFieldName,
                                                      @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
-        return ResultUtil.success(studentService.findBynameByPage(name , page, size , sortFieldName , asc));
+        return ResultUtil.success(studentService.findByNameLikeByPage(name , page, size , sortFieldName , asc));
     }
 }
 

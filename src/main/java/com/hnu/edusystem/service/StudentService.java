@@ -36,7 +36,10 @@ public class StudentService {
         if (student == null || (student.getId() != null && studentRepository.findOne(student.getId()) != null)) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
-
+        //验证学生名重复
+        else if(studentRepository.findOne(student.getId()).getName().equals(student.getName())){
+            throw new EduException(EnumExceptions.ADD_FAILED_CNAME_EXIST);
+        }
         return studentRepository.save(student);
     }
 
@@ -118,7 +121,7 @@ public class StudentService {
             sortFieldName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);
         } else {
@@ -129,8 +132,17 @@ public class StudentService {
         return studentRepository.findAll(pageable);
     }
 
-
-    public Page<Student> findBynameByPage(String name , Integer page , Integer size , String sortFielName ,
+    /**
+     * 通过名称模糊分页查询
+     *
+     * @param name
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
+     * @return
+     */
+    public Page<Student> findByNameLikeByPage(String name , Integer page , Integer size , String sortFielName ,
                                           Integer asc) {
         // 判断排序字段名是否存在
         try {
@@ -140,7 +152,7 @@ public class StudentService {
             sortFielName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFielName);
         } else {

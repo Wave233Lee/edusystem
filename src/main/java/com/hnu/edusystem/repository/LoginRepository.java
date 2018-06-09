@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date: 2018/6/5 15:37
  */
 public interface LoginRepository extends JpaRepository<Login, String> {
+    Login findByIdAndType(String id, Integer type);
 }

@@ -28,13 +28,14 @@ public class LoginService {
      */
     public Login loginConfirm(Login login){
 
-        if(login.getId() == null || loginRepository.findOne(login.getId()) == null ){
+        //验证账号
+        if(login.getId() == null || loginRepository.findByIdAndType(login.getId(),login.getType()) == null){
             throw new EduException(EnumExceptions.ID_NOT_EXIST);
         }
-        else if(!login.getPassword().equals(loginRepository.findOne(login.getId()).getPassword())){
+        //验证密码
+        else if(login.getPassword() == null ||!login.getPassword().equals(loginRepository.findOne(login.getId()).getPassword())){
             throw new EduException(EnumExceptions.PASSWORD_ERROR);
         }
-
         return login;
     }
 

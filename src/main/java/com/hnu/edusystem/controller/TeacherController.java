@@ -40,7 +40,7 @@ public class TeacherController {
     public Result<Teacher> add(@Valid Teacher teacher , BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(teacherService.save(teacher));
@@ -57,7 +57,7 @@ public class TeacherController {
     public Result<Teacher> update(@Valid Teacher teacher , BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(teacherService.update(teacher));
@@ -126,7 +126,16 @@ public class TeacherController {
         return ResultUtil.success(teacherService.findAllByPage(page , size , sortFieldName , asc));
     }
 
-
+    /**
+     * 通过名称模糊查询-分页
+     *
+     * @param name
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
+     * @return
+     */
     @RequestMapping(value = "/getByNameLikeByPage")
     public Result<Page<Teacher>> getByNameByPage(@RequestParam(value = "name" , defaultValue = "") String name ,
                                                  @RequestParam(value = "page" , defaultValue = "0") Integer page ,

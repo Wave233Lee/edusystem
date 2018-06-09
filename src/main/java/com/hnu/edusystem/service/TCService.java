@@ -1,9 +1,9 @@
 package com.hnu.edusystem.service;
 
-import com.hnu.edusystem.domain.SC;
+import com.hnu.edusystem.domain.TC;
 import com.hnu.edusystem.exception.EduException;
 import com.hnu.edusystem.exception.EnumExceptions;
-import com.hnu.edusystem.repository.SCRepository;
+import com.hnu.edusystem.repository.TCRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,57 +16,58 @@ import java.util.List;
 
 /**
  * @Author: WaveLee
- * @Date: 2018/6/6 15:17
+ * @Date: 2018/6/9 9:14
  */
 @Service
-public class SCService {
+public class TCService {
     @Autowired
-    private SCRepository scRepository;
+    private TCRepository tcRepository;
+
 
     /**
-     * 新增——学生选课
+     * 新增
      *
-     * @param sc
+     * @param tc
      * @return
      */
-    public SC save(SC sc) {
+    public TC save(TC tc) {
 
         // 验证是否存在
-        if (sc == null || scRepository.findBySidAndCid(sc.getSid(), sc.getCid()) != null) {
+        if (tc == null || tcRepository.findByTid(tc.getTid()) != null) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
 
-        return scRepository.save(sc);
+        return tcRepository.save(tc);
     }
 
     /**
-     * 更新——教师录入成绩
+     * 更新
      *
-     * @param sc
+     * @param tc
      * @return
      */
-    public SC update(SC sc) {
+    public TC update(TC tc) {
 
         // 验证是否存在
-        if (sc == null || scRepository.findBySidAndCid(sc.getSid(), sc.getCid()) == null) {
+        if (tc == null || tcRepository.findByTid(tc.getTid()) == null) {
             throw new EduException(EnumExceptions.UPDATE_FAILED_NOT_EXIST);
         }
 
-        return scRepository.save(sc);
+        return tcRepository.save(tc);
     }
 
     /**
-     * 通过sid和cid删除
+     * 删除
      *
      * @param id
      */
     public void delete(String sid,String cid) {
 
         // 验证是否存在
-        if (scRepository.findBySidAndCid(sid, cid) == null) {
+        if (tcRepository.findByTidAndCid(sid, cid) == null) {
             throw new EduException(EnumExceptions.DELETE_FAILED_NOT_EXIST);
         }
-        scRepository.delete(scRepository.findBySidAndCid(sid, cid));
+        tcRepository.delete(tcRepository.findByTidAndCid(sid, cid));
     }
 
     /**
@@ -74,18 +75,18 @@ public class SCService {
      *
      * @param scs
      */
-    public void deleteInBatch(Collection<SC> scs) {
-        scRepository.deleteInBatch(scs);
+    public void deleteInBatch(Collection<TC> scs) {
+        tcRepository.deleteInBatch(scs);
     }
 
     /**
-     * 通过学号查询
+     * 通过教工号查询
      *
-     * @param sid
+     * @param tid
      * @return
      */
-    public SC findBySid(String sid) {
-        return scRepository.findBySid(sid);
+    public TC findByTid(String tid) {
+        return tcRepository.findByTid(tid);
     }
 
     /**
@@ -94,8 +95,8 @@ public class SCService {
      * @param sid
      * @return
      */
-    public SC findByCid(String cid) {
-        return scRepository.findByCid(cid);
+    public TC findByCid(String cid) {
+        return tcRepository.findByCid(cid);
     }
 
 
@@ -104,8 +105,8 @@ public class SCService {
      *
      * @return
      */
-    public List<SC> findAll() {
-        return scRepository.findAll();
+    public List<TC> findAll() {
+        return tcRepository.findAll();
     }
 
     /**
@@ -117,11 +118,11 @@ public class SCService {
      * @param asc
      * @return
      */
-    public Page<SC> findAllByPage(Integer page, Integer size, String sortFieldName, Integer asc) {
+    public Page<TC> findAllByPage(Integer page, Integer size, String sortFieldName, Integer asc) {
 
         // 判断排序字段名是否存在
         try {
-            SC.class.getDeclaredField(sortFieldName);
+            TC.class.getDeclaredField(sortFieldName);
         } catch (Exception e) {
             // 如果不存在就设置为id
             sortFieldName = "id";
@@ -135,6 +136,6 @@ public class SCService {
         }
 
         Pageable pageable = new PageRequest(page, size, sort);
-        return scRepository.findAll(pageable);
+        return tcRepository.findAll(pageable);
     }
 }

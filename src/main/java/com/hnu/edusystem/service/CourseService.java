@@ -35,7 +35,10 @@ public class CourseService {
         if (course == null || (course.getId() != null && courseRepository.findOne(course.getId()) != null)) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
-
+        //验证课程名重复
+        else if(courseRepository.findOne(course.getId()).getName().equals(course.getName())){
+            throw new EduException(EnumExceptions.ADD_FAILED_CNAME_EXIST);
+        }
         return courseRepository.save(course);
     }
 
@@ -116,7 +119,7 @@ public class CourseService {
             sortFieldName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);
         } else {
@@ -148,7 +151,7 @@ public class CourseService {
             sortFieldName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC, sortFieldName);
         } else {

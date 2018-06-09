@@ -36,7 +36,7 @@ public class AdminController {
     public Result<Admin> add(@Valid Admin admin, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage().toString());
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(adminService.save(admin));
