@@ -17,9 +17,9 @@ public class Student {
     private String name;
 
     /**
-     * 性别，1为男，0为女
+     * 性别
      */
-    private Integer sex;
+    private String sex;
 
     /**
      * 年龄
@@ -47,11 +47,11 @@ public class Student {
         this.name = name;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

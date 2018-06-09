@@ -36,10 +36,6 @@ public class StudentService {
         if (student == null || (student.getId() != null && studentRepository.findOne(student.getId()) != null)) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
-        //验证学生名重复
-        else if(studentRepository.findOne(student.getId()).getName().equals(student.getName())){
-            throw new EduException(EnumExceptions.ADD_FAILED_CNAME_EXIST);
-        }
         return studentRepository.save(student);
     }
 

@@ -2,7 +2,6 @@ package com.hnu.edusystem.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Course {

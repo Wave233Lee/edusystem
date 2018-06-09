@@ -25,7 +25,7 @@ public class TCService {
 
 
     /**
-     * 新增
+     * 新增——教务处排课
      *
      * @param tc
      * @return
@@ -41,7 +41,7 @@ public class TCService {
     }
 
     /**
-     * 更新
+     * 更新——教务处排课
      *
      * @param tc
      * @return

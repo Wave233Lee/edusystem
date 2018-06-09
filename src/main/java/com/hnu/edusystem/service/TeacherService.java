@@ -35,7 +35,6 @@ public class TeacherService {
         if (teacher == null || (teacher.getId() != null && teacherRepository.findOne(teacher.getId()) !=null)) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
-
         return teacherRepository.save(teacher);
     }
 
@@ -148,7 +147,7 @@ public class TeacherService {
             sortFieldName = "id";
         }
 
-        Sort sort = null;
+        Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC , sortFieldName);
         } else {

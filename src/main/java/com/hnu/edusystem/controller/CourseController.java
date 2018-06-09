@@ -28,9 +28,9 @@ public class CourseController {
     private CourseService courseService;
 
     /**
-     * 新增
      *
      * @param course
+     * @param bindingResult
      * @return
      */
     @RequestMapping(value = "/add")
