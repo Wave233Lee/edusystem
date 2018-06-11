@@ -2,6 +2,7 @@ package com.hnu.edusystem.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Student {

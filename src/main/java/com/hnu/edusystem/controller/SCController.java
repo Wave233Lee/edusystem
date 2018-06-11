@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -33,13 +32,9 @@ public class SCController {
      * @return
      */
     @RequestMapping(value = "/add")
-    public Result<SC> add(@Valid SC sc, BindingResult bindingResult) {
+    public Result<SC> add(String sid, String cid) {
 
-        if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
-        }
-
-        return ResultUtil.success(scService.save(sc));
+        return ResultUtil.success(scService.save(sid,cid));
     }
 
     /**
@@ -49,19 +44,15 @@ public class SCController {
      * @return
      */
     @RequestMapping(value = "/update")
-    public Result<SC> update(@Valid SC sc, BindingResult bindingResult) {
+    public Result<SC> update(String sid, String cid, Integer grade) {
 
-        if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
-        }
-
-        return ResultUtil.success(scService.update(sc));
+        return ResultUtil.success(scService.update(sid, cid, grade));
     }
 
     /**
      * 通过sid和cid删除
      *
-     * @param id
+     * @param
      * @return
      */
     @RequestMapping(value = "/delete")
@@ -71,39 +62,35 @@ public class SCController {
     }
 
     /**
-     * 批量删除
-     *
-     * @param scs
-     * @return
-     */
-    @RequestMapping(value = "/deleteInBatch")
-    public Result<Object> deleteInBatch(@RequestBody Collection<SC> scs) {
-        scService.deleteInBatch(scs);
-        return ResultUtil.success();
-    }
-
-    /**
-     * 通过学号查询
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/getBySid")
-    public Result<SC> getBySid(String id) {
-        return ResultUtil.success(scService.findBySid(id));
-    }
-
-    /**
-     * 通过课程号查询
+     * 通过学生查询——退课用
      *
      * @param sid
      * @return
      */
-    @RequestMapping(value = "/getByCid")
-    public Result<SC> getByCid(String id) {
-        return ResultUtil.success(scService.findByCid(id));
+    @RequestMapping(value = "/getBySid")
+    public Result<List<SC>> getBySid(String sid) {
+        return ResultUtil.success(scService.findBySid(sid));
     }
 
+    /**
+     * 通过课程查询-分页
+     *
+     * @param cname
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
+     * @return
+     */
+    @RequestMapping(value = "/getByCnameByPage")
+    public Result<Page<SC>> getByCnameByPage(@RequestParam(value = "cname" , defaultValue = "") String cname ,
+                                           @RequestParam(value = "page" , defaultValue = "0") Integer page ,
+                                           @RequestParam(value = "size" , defaultValue = "10") Integer size ,
+                                           @RequestParam(value = "sortFieldName" , defaultValue = "sid") String sortFieldName ,
+                                           @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
+
+        return ResultUtil.success(scService.findByCnameByPage(cname , page ,size ,sortFieldName , asc));
+    }
     /**
      * 查询所有
      *

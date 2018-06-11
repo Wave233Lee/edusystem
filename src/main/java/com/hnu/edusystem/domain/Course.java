@@ -1,7 +1,6 @@
 package com.hnu.edusystem.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Course {
@@ -10,7 +9,6 @@ public class Course {
      */
     @Id
     private String id;
-
     /**
      * 课程名
      */

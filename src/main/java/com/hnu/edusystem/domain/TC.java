@@ -1,39 +1,53 @@
 package com.hnu.edusystem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
-@IdClass(value = TCPK.class)
-public class TC {
+//@IdClass(value = TCPK.class)
+public class TC  {
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     /**
      * 教工号
      */
-    @Id
-    @ManyToOne(targetEntity = Teacher.class)
-    @JoinColumn(referencedColumnName = "id")
+//    @Id
+ //   @ManyToOne(targetEntity = Teacher.class)
+  //  @JoinColumn(referencedColumnName = "id")
     private String tid;
 
     /**
      * 教师姓名
      */
-    @ManyToOne(targetEntity = Teacher.class)
-    @JoinColumn(referencedColumnName = "name")
+ //   @ManyToOne(targetEntity = Teacher.class)
+  //  @JoinColumn(referencedColumnName = "name")
     private String tname;
 
     /**
      * 课程号
      */
-    @Id
-    @ManyToOne(targetEntity = Course.class)
-    @JoinColumn(referencedColumnName = "id")
+  //  @Id
+ //   @ManyToOne(targetEntity = Course.class)
+  //  @JoinColumn(referencedColumnName = "id")
     private String cid;
 
     /**
      * 课程名
      */
-    @ManyToOne(targetEntity = Course.class)
-    @JoinColumn(referencedColumnName = "name")
+ //   @ManyToOne(targetEntity = Course.class)
+  //  @JoinColumn(referencedColumnName = "name")
     private String cname;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTid() {
         return tid;

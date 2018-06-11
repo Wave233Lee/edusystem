@@ -43,6 +43,10 @@ public class CourseController {
         return ResultUtil.success(courseService.save(course));
     }
 
+    @RequestMapping(value = "/getByDayAndSession")
+    public Result<Course> findByDayAndSession(String day,Integer session){
+        return ResultUtil.success(courseService.findByDayAndSession(day, session));
+    }
     /**
      * 更新
      *

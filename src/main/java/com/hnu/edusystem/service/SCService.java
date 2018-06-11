@@ -3,7 +3,10 @@ package com.hnu.edusystem.service;
 import com.hnu.edusystem.domain.SC;
 import com.hnu.edusystem.exception.EduException;
 import com.hnu.edusystem.exception.EnumExceptions;
+import com.hnu.edusystem.repository.CourseRepository;
 import com.hnu.edusystem.repository.SCRepository;
+import com.hnu.edusystem.repository.StudentRepository;
+import com.hnu.edusystem.repository.TCRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +25,12 @@ import java.util.List;
 public class SCService {
     @Autowired
     private SCRepository scRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private TCRepository tcRepository;
 
     /**
      * 新增——学生选课
@@ -29,11 +38,32 @@ public class SCService {
      * @param sc
      * @return
      */
-    public SC save(SC sc) {
+    public SC save(String sid ,String cid) {
 
         // 验证是否存在
-        if (sc == null || scRepository.findBySidAndCid(sc.getSid(), sc.getCid()) != null) {
+        if (sid == null || cid == null || scRepository.findBySidAndCid(sid, cid) != null) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
+        }
+
+
+        SC sc = new SC();
+        if(studentRepository.findOne(sid) == null){
+            throw new EduException(EnumExceptions.FAILED_STUDENT_NOT_EXIST);
+        }
+        sc.setSid(sid);
+        sc.setSname(studentRepository.findOne(sid).getName());
+
+        if(courseRepository.findOne(cid) == null){
+            throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
+        }
+        sc.setCid(cid);
+        sc.setCname(courseRepository.findOne(cid).getName());
+        sc.setDay(courseRepository.findOne(cid).getDay());
+        sc.setSession(courseRepository.findOne(cid).getSession());
+
+        //判断时间是否冲突
+        if(scRepository.findByDayAndSession(courseRepository.findOne(cid).getDay(),courseRepository.findOne(cid).getSession()) != null){
+            throw new EduException(EnumExceptions.FAILED_TIME_CONFLICT);
         }
 
         return scRepository.save(sc);
@@ -45,12 +75,20 @@ public class SCService {
      * @param sc
      * @return
      */
-    public SC update(SC sc) {
-
+    public SC update(String sid, String cid, Integer grade) {
         // 验证是否存在
-        if (sc == null || scRepository.findBySidAndCid(sc.getSid(), sc.getCid()) == null) {
+        if (sid == null || cid == null || scRepository.findBySidAndCid(sid, cid) == null) {
             throw new EduException(EnumExceptions.UPDATE_FAILED_NOT_EXIST);
         }
+
+        SC sc = new SC();
+        sc.setSid(sid);
+        sc.setSname(studentRepository.findOne(sid).getName());
+        sc.setCid(cid);
+        sc.setCname(courseRepository.findOne(cid).getName());
+        sc.setDay(courseRepository.findOne(cid).getDay());
+        sc.setSession(courseRepository.findOne(cid).getSession());
+        sc.setGrade(grade);
 
         return scRepository.save(sc);
     }
@@ -70,32 +108,49 @@ public class SCService {
     }
 
     /**
-     * 批量删除
-     *
-     * @param scs
-     */
-    public void deleteInBatch(Collection<SC> scs) {
-        scRepository.deleteInBatch(scs);
-    }
-
-    /**
-     * 通过学号查询
-     *
+     * 通过学生查询——选课用
      * @param sid
      * @return
      */
-    public SC findBySid(String sid) {
-        return scRepository.findBySid(sid);
+    public List<SC> findBySid(String sid) {
+        return scRepository.findBySidOrderByCid(sid);
     }
 
     /**
-     * 通过课程号查询
+     * 通过课程分页查询——更新成绩用
      *
-     * @param sid
+     * @param cname
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
      * @return
      */
-    public SC findByCid(String cid) {
-        return scRepository.findByCid(cid);
+    public Page<SC> findByCnameByPage(String cname , Integer page , Integer size , String sortFieldName ,
+                                    Integer asc) {
+
+        //判断排序字段名是否存在
+        try {
+            SC.class.getDeclaredField(sortFieldName);
+        } catch (Exception e) {
+            //如果不存在则设置为id
+            sortFieldName = "sid";
+        }
+
+        //判断该教师是否对应该课程
+        if(tcRepository.findByCname(cname) == null){
+            throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
+        }
+
+        Sort sort;
+        if (asc == 0) {
+            sort = new Sort(Sort.Direction.DESC , sortFieldName);
+        } else {
+            sort = new Sort(Sort.Direction.ASC , sortFieldName);
+        }
+
+        Pageable pageable = new PageRequest(page , size ,sort);
+        return scRepository.findByCnameLikeOrderBySid("%" + cname + "%",pageable);
     }
 
 

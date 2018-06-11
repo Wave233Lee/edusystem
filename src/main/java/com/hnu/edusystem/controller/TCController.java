@@ -34,13 +34,9 @@ public class TCController {
      * @return
      */
     @RequestMapping(value = "/add")
-    public Result<TC> add(@Valid TC tc, BindingResult bindingResult) {
+    public Result<TC> add(String tid, String cid) {
 
-        if (bindingResult.hasErrors()) {
-            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
-        }
-
-        return ResultUtil.success(tcService.save(tc));
+        return ResultUtil.success(tcService.save(tid, cid));
     }
 
     /**
@@ -60,51 +56,56 @@ public class TCController {
     }
 
     /**
-     * 通过sid和cid删除
+     * 通过tid和cid删除
      *
-     * @param id
+     * @param
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result<Object> delete(String sid,String cid) {
-        tcService.delete(sid, cid);
+    public Result<Object> delete(String tid,String cid) {
+        tcService.delete(tid, cid);
         return ResultUtil.success();
     }
 
     /**
-     * 批量删除
+     * 通过教师查询-分页
      *
-     * @param tcs
+     * @param sname
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
      * @return
      */
-    @RequestMapping(value = "/deleteInBatch")
-    public Result<Object> deleteInBatch(@RequestBody Collection<TC> tcs) {
-        tcService.deleteInBatch(tcs);
-        return ResultUtil.success();
+    @RequestMapping(value = "/getByTnameByPage")
+    public Result<Page<TC>> getByTnameByPage(@RequestParam(value = "tname" , defaultValue = "") String tname,
+                                             @RequestParam(value = "page" , defaultValue = "0") Integer page ,
+                                             @RequestParam(value = "size" , defaultValue = "10") Integer size ,
+                                             @RequestParam(value = "sortFieldName" , defaultValue = "cid") String sortFieldName ,
+                                             @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
+
+        return ResultUtil.success(tcService.findByTnameByPage(tname , page ,size ,sortFieldName , asc));
     }
 
     /**
-     * 通过教工号查询
+     * 通过课程查询-分页
      *
-     * @param id
+     * @param cname
+     * @param page
+     * @param size
+     * @param sortFieldName
+     * @param asc
      * @return
      */
-    @RequestMapping(value = "/getBySid")
-    public Result<TC> getBySid(String id) {
-        return ResultUtil.success(tcService.findByTid(id));
-    }
+    @RequestMapping(value = "/getByCnameByPage")
+    public Result<Page<TC>> getByCnameByPage(@RequestParam(value = "cname" , defaultValue = "") String cname ,
+                                             @RequestParam(value = "page" , defaultValue = "0") Integer page ,
+                                             @RequestParam(value = "size" , defaultValue = "10") Integer size ,
+                                             @RequestParam(value = "sortFieldName" , defaultValue = "tid") String sortFieldName ,
+                                             @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
 
-    /**
-     * 通过课程号查询
-     *
-     * @param sid
-     * @return
-     */
-    @RequestMapping(value = "/getByCid")
-    public Result<TC> getByCid(String id) {
-        return ResultUtil.success(tcService.findByCid(id));
+        return ResultUtil.success(tcService.findByCnameByPage(cname , page ,size ,sortFieldName , asc));
     }
-
     /**
      * 查询所有
      *

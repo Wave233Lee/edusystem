@@ -19,4 +19,6 @@ public interface CourseRepository extends JpaRepository<Course, String> {
      * @return
      */
     Page<Course> findByNameLike(String name, Pageable pageable);
+    Course findByDayAndSession(String day, Integer session);
+    Course findByName(String name);
 }

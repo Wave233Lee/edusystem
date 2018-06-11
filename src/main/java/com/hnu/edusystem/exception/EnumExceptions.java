@@ -9,7 +9,7 @@ package com.hnu.edusystem.exception;
 public enum EnumExceptions {
 	UNKNOWN_ERROR(-1, "未知错误"),
 	SUCCESS(0, "操作成功"),
-	ADD_FAILED_DUPLICATE(1, "新增失败, id已存在"),
+	ADD_FAILED_DUPLICATE(1, "新增失败, 数据已存在"),
 	UPDATE_FAILED_NOT_EXIST(2, "更新失败, 数据不存在"),
 	DELETE_FAILED_NOT_EXIST(3, "删除失败, 数据不存在"),
 	REQUEST_METHOD(4, "请求方法不匹配"),
@@ -17,6 +17,9 @@ public enum EnumExceptions {
 	ID_NOT_EXIST(6,"账号不存在"),
     PASSWORD_ERROR(7,"密码错误"),
     ADD_FAILED_CNAME_EXIST(8,"课程名已存在"),
+    FAILED_COURSE_NOT_EXIST(9,"课程不存在"),
+    FAILED_STUDENT_NOT_EXIST(10,"学生不存在"),
+	FAILED_TIME_CONFLICT(11,"时间冲突"),
 	;
 
 	/** 编码 */

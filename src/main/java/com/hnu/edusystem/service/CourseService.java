@@ -36,12 +36,15 @@ public class CourseService {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
         //验证课程名重复
-        else if(courseRepository.findOne(course.getId()).getName().equals(course.getName())){
+        else if(courseRepository.findByName(course.getName()) != null){
             throw new EduException(EnumExceptions.ADD_FAILED_CNAME_EXIST);
         }
         return courseRepository.save(course);
     }
 
+    public Course findByDayAndSession(String day, Integer session){
+        return courseRepository.findByDayAndSession(day,session);
+    }
     /**
      * 更新
      *
