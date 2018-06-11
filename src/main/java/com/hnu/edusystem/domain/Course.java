@@ -31,9 +31,21 @@ public class Course {
     private Integer num;
 
     /**
+     * 已选人数
+     */
+    private Integer selected;
+    /**
      * 上课地点
      */
     private String location;
+
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
+    }
 
     public String getId() {
         return id;
@@ -91,6 +103,7 @@ public class Course {
                 ", day='" + day + '\'' +
                 ", session=" + session +
                 ", num=" + num +
+                ", selected=" + selected +
                 ", location='" + location + '\'' +
                 '}';
     }

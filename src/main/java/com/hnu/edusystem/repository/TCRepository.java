@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TCRepository extends JpaRepository<TC, Long> {
     Page<TC> findByTnameOrderByCid(String tid, Pageable pageable);
     Page<TC> findByCnameOrderByTid(String cid, Pageable pageable);
-    TC findByCname(String cid);
+    TC findByCnameAndTid(String cname,String tid);
     TC findByTidAndCid(String sid, String cid);
 }

@@ -67,13 +67,18 @@ public class SCController {
      * @param sid
      * @return
      */
-    @RequestMapping(value = "/getBySid")
-    public Result<List<SC>> getBySid(String sid) {
-        return ResultUtil.success(scService.findBySid(sid));
+    @RequestMapping(value = "/getBySidByPage")
+    public Result<Page<SC>> getBySidByPage(@RequestParam(value = "sid" , defaultValue = "") String sid ,
+                                             @RequestParam(value = "page" , defaultValue = "0") Integer page ,
+                                             @RequestParam(value = "size" , defaultValue = "10") Integer size ,
+                                             @RequestParam(value = "sortFieldName" , defaultValue = "sid") String sortFieldName ,
+                                             @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
+
+        return ResultUtil.success(scService.findBySidByPage(sid , page ,size ,sortFieldName , asc));
     }
 
     /**
-     * 通过课程查询-分页
+     * 通过课程查询-教师用
      *
      * @param cname
      * @param page
@@ -82,15 +87,25 @@ public class SCController {
      * @param asc
      * @return
      */
-    @RequestMapping(value = "/getByCnameByPage")
+    @RequestMapping(value = "/getByCnameAndTidByPage")
     public Result<Page<SC>> getByCnameByPage(@RequestParam(value = "cname" , defaultValue = "") String cname ,
-                                           @RequestParam(value = "page" , defaultValue = "0") Integer page ,
-                                           @RequestParam(value = "size" , defaultValue = "10") Integer size ,
-                                           @RequestParam(value = "sortFieldName" , defaultValue = "sid") String sortFieldName ,
-                                           @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
+                                             @RequestParam(value = "tid" , defaultValue = "") String tid ,
+                                             @RequestParam(value = "page" , defaultValue = "0") Integer page ,
+                                             @RequestParam(value = "size" , defaultValue = "10") Integer size ,
+                                             @RequestParam(value = "sortFieldName" , defaultValue = "sid") String sortFieldName ,
+                                             @RequestParam(value = "asc" , defaultValue = "1") Integer asc) {
 
-        return ResultUtil.success(scService.findByCnameByPage(cname , page ,size ,sortFieldName , asc));
+        return ResultUtil.success(scService.findByCnameAndTidByPage(cname ,tid, page ,size ,sortFieldName , asc));
     }
+
+    /**
+     * 查询教师——课程——学生
+     */
+    @RequestMapping(value = "/getByCnameAndSnameAndTid")
+    public Result<SC> getByCnameAndSnameAndTid(String cname, String sname, String tid){
+        return ResultUtil.success(scService.findByCnameAndSnameAndTid(cname, sname, tid));
+    }
+
     /**
      * 查询所有
      *

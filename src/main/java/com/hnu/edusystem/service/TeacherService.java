@@ -114,6 +114,9 @@ public class TeacherService {
             //如果不存在就设置为id
             sortFieldName = "id";
         }
+        //判断页码
+        if(page < 0) page = 0;
+
         Sort sort;
         if (asc == 0) {
             sort = new Sort(Sort.Direction.DESC , sortFieldName);
@@ -145,6 +148,8 @@ public class TeacherService {
             //如果不存在则设置为id
             sortFieldName = "id";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {

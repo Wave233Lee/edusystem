@@ -13,8 +13,9 @@ import java.util.List;
  * @Date: 2018/6/5 15:38
  */
 public interface SCRepository extends JpaRepository<SC, Long> {
-    List<SC> findBySidOrderByCid(String sid);
+    Page<SC> findBySidOrderByCid(String sid, Pageable pageable);
     Page<SC> findByCnameLikeOrderBySid(String cname, Pageable pageable);
     SC findBySidAndCid(String sid, String cid);
     SC findByDayAndSession(String day, Integer session);
+    SC findByCnameAndSname(String cname, String sname);
 }

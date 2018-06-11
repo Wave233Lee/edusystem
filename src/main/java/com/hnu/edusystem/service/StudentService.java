@@ -116,6 +116,8 @@ public class StudentService {
             //如果不存在就设置为id
             sortFieldName = "id";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {
@@ -147,6 +149,8 @@ public class StudentService {
             // 如果不存在就设置为id
             sortFielName = "id";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {

@@ -20,6 +20,7 @@ public enum EnumExceptions {
     FAILED_COURSE_NOT_EXIST(9,"课程不存在"),
     FAILED_STUDENT_NOT_EXIST(10,"学生不存在"),
 	FAILED_TIME_CONFLICT(11,"时间冲突"),
+    FAILED_NUM_MAX(12,"课程人数已满"),
 	;
 
 	/** 编码 */

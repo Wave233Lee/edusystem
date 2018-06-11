@@ -109,6 +109,8 @@ public class TCService {
             //如果不存在则设置为id
             sortFieldName = "cid";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {
@@ -142,6 +144,8 @@ public class TCService {
             //如果不存在则设置为id
             sortFieldName = "tid";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {
@@ -182,6 +186,8 @@ public class TCService {
             // 如果不存在就设置为cid
             sortFieldName = "cid";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {

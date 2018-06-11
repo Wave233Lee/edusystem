@@ -45,26 +45,23 @@ public class SCService {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
 
-
-        SC sc = new SC();
-        if(studentRepository.findOne(sid) == null){
-            throw new EduException(EnumExceptions.FAILED_STUDENT_NOT_EXIST);
+        //判断课程是否人满
+        if(courseRepository.findOne(cid).getNum().equals(courseRepository.findOne(cid).getSelected())){
+            throw new EduException(EnumExceptions.FAILED_NUM_MAX);
         }
-        sc.setSid(sid);
-        sc.setSname(studentRepository.findOne(sid).getName());
-
-        if(courseRepository.findOne(cid) == null){
-            throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
-        }
-        sc.setCid(cid);
-        sc.setCname(courseRepository.findOne(cid).getName());
-        sc.setDay(courseRepository.findOne(cid).getDay());
-        sc.setSession(courseRepository.findOne(cid).getSession());
 
         //判断时间是否冲突
         if(scRepository.findByDayAndSession(courseRepository.findOne(cid).getDay(),courseRepository.findOne(cid).getSession()) != null){
             throw new EduException(EnumExceptions.FAILED_TIME_CONFLICT);
         }
+
+        SC sc = new SC();
+        sc.setSid(sid);
+        sc.setSname(studentRepository.findOne(sid).getName());
+        sc.setCid(cid);
+        sc.setCname(courseRepository.findOne(cid).getName());
+        sc.setDay(courseRepository.findOne(cid).getDay());
+        sc.setSession(courseRepository.findOne(cid).getSession());
 
         return scRepository.save(sc);
     }
@@ -108,12 +105,33 @@ public class SCService {
     }
 
     /**
-     * 通过学生查询——选课用
+     * 通过学生查询——退课用
      * @param sid
      * @return
      */
-    public List<SC> findBySid(String sid) {
-        return scRepository.findBySidOrderByCid(sid);
+    public Page<SC> findBySidByPage(String sid, Integer page , Integer size , String sortFieldName , Integer asc) {
+
+        //判断排序字段名是否存在
+        try {
+            SC.class.getDeclaredField(sortFieldName);
+        } catch (Exception e) {
+            //如果不存在则设置为id
+            sortFieldName = "sid";
+        }
+
+        //判断页码
+        if(page < 0) page = 0;
+
+        Sort sort;
+        if (asc == 0) {
+            sort = new Sort(Sort.Direction.DESC , sortFieldName);
+        } else {
+            sort = new Sort(Sort.Direction.ASC , sortFieldName);
+        }
+
+        Pageable pageable = new PageRequest(page , size ,sort);
+
+        return scRepository.findBySidOrderByCid(sid,pageable);
     }
 
     /**
@@ -126,7 +144,7 @@ public class SCService {
      * @param asc
      * @return
      */
-    public Page<SC> findByCnameByPage(String cname , Integer page , Integer size , String sortFieldName ,
+    public Page<SC> findByCnameAndTidByPage(String cname ,String tid, Integer page , Integer size , String sortFieldName ,
                                     Integer asc) {
 
         //判断排序字段名是否存在
@@ -137,8 +155,11 @@ public class SCService {
             sortFieldName = "sid";
         }
 
+        //判断页码
+        if(page < 0) page = 0;
+
         //判断该教师是否对应该课程
-        if(tcRepository.findByCname(cname) == null){
+        if(tcRepository.findByCnameAndTid(cname,tid) == null){
             throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
         }
 
@@ -153,6 +174,17 @@ public class SCService {
         return scRepository.findByCnameLikeOrderBySid("%" + cname + "%",pageable);
     }
 
+    /**
+     * 查询课程的学生
+     */
+    public SC findByCnameAndSnameAndTid(String cname, String sname, String tid){
+        //判断该教师是否对应该课程
+        if(tcRepository.findByCnameAndTid(cname,tid) == null){
+            throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
+        }
+
+        return scRepository.findByCnameAndSname(cname, sname);
+    }
 
     /**
      * 查询所有
@@ -181,6 +213,8 @@ public class SCService {
             // 如果不存在就设置为cid
             sortFieldName = "cid";
         }
+        //判断页码
+        if(page < 0) page = 0;
 
         Sort sort;
         if (asc == 0) {
