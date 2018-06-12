@@ -74,7 +74,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
         }
     </script>
@@ -88,7 +88,7 @@
         </div>
         <div class="backhome">
             <div id="top" class="row show-grid">
-                <a style="display:block;" href="jwStudent.html.html">
+                <a style="display:block;" href="jwStudent.html">
                 <div class="col-sm-2">
                     <img src="imgs/back.png" width="18px" height="18px">
                 </div>

@@ -95,7 +95,8 @@
                         async:false,
                         success:function (obj) {
                             if(obj.code === 0){
-                                document.cookie = uname;
+                             //   document.cookie = uname;
+                                window.sessionStorage.setItem("username", uname);
                                 var f=document.getElementById("myform");
                                 f.action="jwManager.html";
                                 f.submit()
@@ -112,9 +113,9 @@
     		    }
     			else if(text==="教师"){
                     var type = 1;
-                    var uname = $("#username").val()
-                    var upass = $("#userpass").val()
-                    var urlStr = 'http://154.8.149.148/edu/login/confirm?type='+type+'&id='+uname+'&password='+upass
+                    var uname = $("#username").val();
+                    var upass = $("#userpass").val();
+                    var urlStr = 'http://154.8.149.148/edu/login/confirm?type='+type+'&id='+uname+'&password='+upass;
                  //   alert(urlStr)
                      $.ajax({
                          url:urlStr,
@@ -122,7 +123,7 @@
                          async:false,
                             success:function (obj) {
                                 if(obj.code === 0){
-                                    document.cookie = uname;
+                                    window.sessionStorage.setItem("username", uname);
                                     var f=document.getElementById("myform");
                                     f.action="jwTeacher.html";
                                     f.submit()
@@ -147,7 +148,7 @@
                          async:false,
                             success:function (obj) {
                                 if(obj.code === 0){
-                                    document.cookie = uname;
+                                    window.sessionStorage.setItem("username", uname);
                                     var f=document.getElementById("myform");
                                     f.action="jwStudent.html";
                                     f.submit()

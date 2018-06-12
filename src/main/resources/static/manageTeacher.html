@@ -320,7 +320,7 @@ function modifyTeacher() {
     </script>
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
         }
     </script>

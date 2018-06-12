@@ -148,13 +148,14 @@
             function () {
             }
         );
+        var s = window.sessionStorage.getItem("username");
 
         function selectC(obj){
             var td = $(obj).parent().parent().find('td');
             $('#modal-selectcourseId').val(td.eq(0).text());
         }
         function selectCourse() {
-            var studentId =document.cookie;
+            var studentId =s;
             var courseId = $('#modal-selectcourseId').val();
 
                 var urlStr = 'http://154.8.149.148/edu/sc/add?sid=' + studentId + '&cid=' + courseId;
@@ -253,7 +254,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
         }
     </script>

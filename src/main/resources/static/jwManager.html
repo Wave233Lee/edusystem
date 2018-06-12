@@ -69,8 +69,9 @@
         </style>
         <script type="text/javascript">
         window.onload=function(){
-           var a= document.cookie.split(";");
-           var s=a[0];
+         //  var a= document.cookie.split(";");
+        //   var s=a[0];
+           var s = window.sessionStorage.getItem("username");
            document.getElementById("userId").innerHTML=s;
         }
         </script>

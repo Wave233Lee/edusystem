@@ -121,6 +121,7 @@
             function () {
             }
         );
+        var s = window.sessionStorage.getItem("username");
 
         function setscInformation(obj) {
             var td = $(obj).parent().parent().find('td');
@@ -159,7 +160,7 @@
             var size = 4;
             var sortFieldName = 'id';
             var asc = 1;
-            var teacherId=document.cookie;
+            var teacherId=s;
             var name =$('#search-courseName').val();
             var urlStr = 'http://154.8.149.148/edu/sc/getByCnameAndTidByPage?page='+ page + '&tid='+teacherId+'&cname='+ name + '&size=' + size + '&sortFieldName=' + sortFieldName + '&asc=' + asc;
              // alert(urlStr);
@@ -179,7 +180,7 @@
         function searchStudentByName() {
             var sname =$('#search-studentName').val();
             var cname =$('#search-courseName').val();
-            var teacherId=document.cookie;
+            var teacherId=s;
             var urlStr = 'http://154.8.149.148/edu/sc/getByCnameAndSnameAndTid?cname='+cname+'&sname='+sname+'&tid='+ teacherId;
             //  alert(urlStr);
             $.ajax({
@@ -234,7 +235,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
         }
     </script>

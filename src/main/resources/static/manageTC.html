@@ -155,10 +155,10 @@
         function arrangeTC() {
             var courseName = $('#modal-courseName').val();
             var teacherName = $('#modal-teacherName').val();
-         //   var urlStr = 'http://154.8.149.148/edu/tc/add?cname=' + courseName + '&tname=' +teacherName;
-            var urlStr = 'http://127.0.0.1:8080/edu/tc/add?cname=' + courseName + '&tname=' +teacherName;
+            var urlStr = 'http://154.8.149.148/edu/tc/add?cname=' + courseName + '&tname=' +teacherName;
+         //   var urlStr = 'http://127.0.0.1:8080/edu/tc/add?cname=' + courseName + '&tname=' +teacherName;
 
-            alert(urlStr);
+         //   alert(urlStr);
             $.ajax({
                 url:urlStr,
                 dataType:'json',
@@ -255,7 +255,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
         }
     </script>

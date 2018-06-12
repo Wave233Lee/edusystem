@@ -150,6 +150,7 @@
             function () {
             }
         );
+        var s = window.sessionStorage.getItem("username");
 
 
         function withdrawalC(obj){
@@ -157,7 +158,7 @@
             $('#modal-deletecourseId').val(td.eq(0).text());
         }
         function withdrawalCourse() {
-            var studentId=document.cookie;
+            var studentId=s;
             var courseId = $('#modal-deletecourseId').val();
             var urlStr = 'http://154.8.149.148/edu/sc/delete?sid='+ studentId + '&cid='+ courseId;
           //  alert(urlStr);
@@ -184,7 +185,7 @@
             var size = 6;
             var sortFieldName = 'id';
             var asc = 1;
-            var studentid =document.cookie;
+            var studentid =s;
             var urlStr = 'http://154.8.149.148/edu/sc/getBySidByPage?sid='+ studentid+'&page='+ page + '&size=' + size + '&sortFieldName=' + sortFieldName + '&asc=' + asc ;
           //  alert(urlStr);
             $.ajax({
@@ -224,7 +225,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s= document.cookie;
+            var s = window.sessionStorage.getItem("username");
             document.getElementById("userId").innerHTML=s;
             getmyCourseInformation()
         }
