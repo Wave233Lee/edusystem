@@ -39,6 +39,7 @@ public class CourseService {
         else if(courseRepository.findByName(course.getName()) != null){
             throw new EduException(EnumExceptions.ADD_FAILED_CNAME_EXIST);
         }
+        course.setSelected(0);
         return courseRepository.save(course);
     }
 
@@ -57,6 +58,8 @@ public class CourseService {
         if (course == null || course.getId() == null || courseRepository.findOne(course.getId()) == null) {
             throw new EduException(EnumExceptions.UPDATE_FAILED_NOT_EXIST);
         }
+
+        course.setSelected(0);
 
         return courseRepository.save(course);
     }

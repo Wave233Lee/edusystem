@@ -34,9 +34,9 @@ public class TCController {
      * @return
      */
     @RequestMapping(value = "/add")
-    public Result<TC> add(String tid, String cid) {
+    public Result<TC> add(String cname, String tname) {
 
-        return ResultUtil.success(tcService.save(tid, cid));
+        return ResultUtil.success(tcService.save(cname, tname));
     }
 
     /**
@@ -87,6 +87,10 @@ public class TCController {
         return ResultUtil.success(tcService.findByTnameByPage(tname , page ,size ,sortFieldName , asc));
     }
 
+    @RequestMapping(value = "getByTid")
+    public Result<List<TC>> getByTid(String tid){
+        return ResultUtil.success(tcService.findByTid(tid));
+    }
     /**
      * 通过课程查询-分页
      *
@@ -118,7 +122,7 @@ public class TCController {
     }
 
     /**
-     * 查询所有-分页
+     * 查询所有-分页——排课结果
      *
      * @param page
      * @param size

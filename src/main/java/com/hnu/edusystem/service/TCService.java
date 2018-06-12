@@ -29,32 +29,32 @@ public class TCService {
     @Autowired
     private CourseRepository courseRepository;
 
-
     /**
      * 新增——教务处排课
      *
      * @param tc
      * @return
      */
-    public TC save(String tid, String cid) {
+    public TC save(String tname, String cname) {
 
         // 验证是否存在
-        if (tid == null || cid == null || tcRepository.findByTidAndCid(tid, cid) != null) {
+        if (tname == null || cname == null || tcRepository.findByTidAndCid(tname, cname) != null) {
             throw new EduException(EnumExceptions.ADD_FAILED_DUPLICATE);
         }
 
+
         TC tc = new TC();
-        if(teacherRepository.findOne(tid) == null){
+        if(teacherRepository.findOne(tname) == null){
             throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
         }
-        tc.setTid(tid);
-        tc.setTname(teacherRepository.findOne(tid).getName());
+        tc.setTid(tname);
+        tc.setTname(teacherRepository.findOne(tname).getName());
 
-        if(courseRepository.findOne(cid) == null){
-            throw new EduException(EnumExceptions.FAILED_STUDENT_NOT_EXIST);
+        if(courseRepository.findOne(cname) == null){
+            throw new EduException(EnumExceptions.FAILED_TEACHER_NOT_EXIST);
         }
-        tc.setCid(cid);
-        tc.setCname(courseRepository.findOne(cid).getName());
+        tc.setCid(cname);
+        tc.setCname(courseRepository.findOne(cname).getName());
 
         return tcRepository.save(tc);
     }
@@ -123,6 +123,9 @@ public class TCService {
         return tcRepository.findByTnameOrderByCid(tname,pageable);
     }
 
+    public List<TC> findByTid(String tid){
+        return tcRepository.findByTid(tid);
+    }
 
     /**
      * 通过课程分页查询

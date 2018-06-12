@@ -16,6 +16,6 @@ public interface SCRepository extends JpaRepository<SC, Long> {
     Page<SC> findBySidOrderByCid(String sid, Pageable pageable);
     Page<SC> findByCnameLikeOrderBySid(String cname, Pageable pageable);
     SC findBySidAndCid(String sid, String cid);
-    SC findByDayAndSession(String day, Integer session);
+    SC findByDayAndSessionAndSid(String day, Integer session, String sid);
     SC findByCnameAndSname(String cname, String sname);
 }

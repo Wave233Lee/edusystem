@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>教务系统</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content=""> 
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+        <style type="text/css" rel="stylesheet">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            html,body{
+                width: 100%;
+                height: 100%;               
+        		background-color: #EEE0E5;
+        	}
+        	.div-mid{
+        		background-color: #FFFFFF;	
+        		height:100%;
+        		border:1px solid gray;
+                margin:0;
+        	}
+        	.div-top{
+        		background-color:red;
+        		width:100%;
+        		height:15%;
+                text-align: center;
+                line-height: 80px;
+                font-size: 36px;
+                color:#FFFFFF;
+        		border:0px solid gray;
+        	}
+        	.main-content{
+        		width:100%;
+        		height:60%;
+        		border:0px solid gray;
+        	}
+        	.div-bottom{
+        		width:100%;
+        		height:25%;
+        		border:0px solid gray;
+        	}
+        	.left-body{
+        		
+        		width:74%;
+        		height:100%;
+        		float:left;
+        		border:0px solid gray;
+
+        	}
+        	.right-body{
+        		background-image: url("imgs/login_bg.gif");
+        		background-size: 100% 100%;
+        		background-repeat: no-repeat;
+        		width:25%;
+        		height:100%;
+        		float:right;
+        		border:0px solid gray;
+        		
+        	}
+        	.right-body1{
+        		width:100%;
+        		height:18%;
+        		border:0px solid gray;
+        		
+        	}
+        	.right-body2{
+        		width:100%;
+        		height:82%;	
+                padding:5px;
+        		border:0px solid gray;
+        		
+        	}
+        	
+    	</style>
+    	<script type="text/javascript">
+            $(document).ready(function () {
+            });
+
+    		function getAdd(){
+    			var obj = document.getElementById("way"); //定位select
+				var index = obj.selectedIndex; // 选中索引
+				var text = obj.options[index].text; // 选中值
+    			//alert(text)
+    			if(text==="管理员"){
+                    var type = 0;
+                    var uname = $("#username").val();
+                    var upass = $("#userpass").val();
+                    var urlStr = 'http://154.8.149.148/edu/login/confirm?type='+type+'&id='+uname+'&password='+upass;
+                //    alert(urlStr);
+                    $.ajax({
+                        url:urlStr,
+                        dataType:'json',
+                        async:false,
+                        success:function (obj) {
+                            if(obj.code === 0){
+                                document.cookie=uname;
+                                var f=document.getElementById("myform");
+                                f.action="jwManager.html";
+                                f.submit()
+                            }
+                            else{
+                                alert(obj.message)
+                            }
+                        },
+                        error:function (error) {
+                            alert("can't connected to server !");
+                            console.log(error)
+                            }
+                    })
+    		    }
+    			else if(text==="教师"){
+                    var type = 1;
+                    var uname = $("#username").val()
+                    var upass = $("#userpass").val()
+                    var urlStr = 'http://154.8.149.148/edu/login/confirm?type='+type+'&id='+uname+'&password='+upass
+                 //   alert(urlStr)
+                     $.ajax({
+                         url:urlStr,
+                         dataType:'json',
+                         async:false,
+                            success:function (obj) {
+                                if(obj.code === 0){
+                                    document.cookie=uname;
+                                    var f=document.getElementById("myform");
+                                    f.action="jwTeacher.html";
+                                    f.submit()
+                                }else {
+                                    alert(obj.message)
+                                }
+                            },
+                        error:function (error) {
+                        console.log(error)
+                    }
+                })
+    		}
+				else if(text==="学生"){
+                     var type = 2;
+                    var uname = $("#username").val()
+                    var upass = $("#userpass").val()
+                    var urlStr = 'http://154.8.149.148/edu/login/confirm?type='+type+'&id='+uname+'&password='+upass
+                   // alert(urlStr)
+                     $.ajax({
+                        url:urlStr,
+                        dataType:'json',
+                         async:false,
+                            success:function (obj) {
+                                if(obj.code === 0){
+                                    document.cookie=uname;
+                                       var f=document.getElementById("myform");
+                                    f.action="jwStudent.html";
+                                    f.submit()
+                                }else {
+                                    alert(obj.message)
+                                }
+                            },
+                        error:function (error) {
+                        console.log(error)
+                    }
+                })
+    			}
+    		}
+
+    	</script>
+        
+</head>
+<body>
+	<div class="div-mid">
+		<div class="div-top">
+            教&nbsp;&nbsp;学&nbsp;&nbsp;服&nbsp;&nbsp;务&nbsp;&nbsp;系&nbsp;&nbsp;统
+		</div>
+		<div class="main-content">
+			<div class="left-body">
+				<a href="http://www.hnu.edu.cn/hdgk.htm"><img src="imgs/left.jpg" width="100%" height="100%"></a>
+			</div>
+			<div class="right-body">
+				<div class="right-body1">
+				</div>
+				<div class="right-body2">
+				<form id="myform" action="" onsubmit="getAdd()" method="get">
+					<!--<form id="myform" action="jwStudent" onsubmit="getAdd()" method="get">-->
+					<div class="row show-grid">
+                        <div class="col-sm-3">
+                            登&nbsp;&nbsp;录&nbsp;&nbsp;方：
+                        </div>
+                        <div class="col-sm-9">
+					       <select id="way" style="width:150px"><option value="manager">管理员</option><option value="teacher">教师</option><option value="student">学生</option></select>
+                        </div>
+                    </div><br>
+                    <div class="row show-grid">
+                        <div class="col-sm-3">
+					       用&nbsp;&nbsp;户&nbsp;&nbsp;名：
+                        </div>
+                        <div class="col-sm-9">
+                            <input style="width:150px" type="text" id="username">
+                        </div>
+                    </div><br>
+                    <div class="row show-grid">
+                        <div class="col-sm-3">
+					       密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
+                        </div>
+                        <div class="col-sm-9">
+                            <input style="width:150px" type="password" id="userpass"><br>
+                        </div>
+                    </div><br>
+                    <div class="row show-grid">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                            <input style="width:60px" type="submit"  value="登录">
+                        </div>
+                    </div><br>
+				</form>
+			</div>
+		</div>
+		<div class="div-bottom">
+		<!--	<img src="imgs/link.jpg">
+		<font font-size="15px">友情链接：</font>&nbsp;<input type="button" onclick="getAdd()"><br>
+			<a href="http://jwc.hnu.edu.cn/">教务处</a><br>
+			<a href="http://kczx.hnu.cn/G2S/ShowSystem/Index.aspx">课程中心</a><br>-->
+			<img src="imgs/login_line.gif" width="100%">
+		</div>
+	</div>
+    </div>
+</body>
+</html>

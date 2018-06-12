@@ -51,7 +51,7 @@ public class SCService {
         }
 
         //判断时间是否冲突
-        if(scRepository.findByDayAndSession(courseRepository.findOne(cid).getDay(),courseRepository.findOne(cid).getSession()) != null){
+        if(scRepository.findByDayAndSessionAndSid(courseRepository.findOne(cid).getDay(),courseRepository.findOne(cid).getSession(),sid) != null){
             throw new EduException(EnumExceptions.FAILED_TIME_CONFLICT);
         }
 
@@ -78,13 +78,7 @@ public class SCService {
             throw new EduException(EnumExceptions.UPDATE_FAILED_NOT_EXIST);
         }
 
-        SC sc = new SC();
-        sc.setSid(sid);
-        sc.setSname(studentRepository.findOne(sid).getName());
-        sc.setCid(cid);
-        sc.setCname(courseRepository.findOne(cid).getName());
-        sc.setDay(courseRepository.findOne(cid).getDay());
-        sc.setSession(courseRepository.findOne(cid).getSession());
+        SC sc = scRepository.findBySidAndCid(sid, cid);
         sc.setGrade(grade);
 
         return scRepository.save(sc);
