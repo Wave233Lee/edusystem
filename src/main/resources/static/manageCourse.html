@@ -171,11 +171,11 @@
             dataType:'json',
 
             success:function (obj) {
-                if(obj.code == 1){
-                    alert('新增失败，主键已存在！')
+                if(obj.code == 0){
+                    getAllCourseInformation(obj)
+                    alert('添加成功！')
                 }else{
                     alert(obj.message)
-                    getAllCourseInformation(obj)
                 }
             },
             error:function (error) {

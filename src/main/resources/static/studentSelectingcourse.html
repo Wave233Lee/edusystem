@@ -166,8 +166,12 @@
 
                     success:function (obj) {
                      //   document.getElementById('').className="btn btn-danger″
-                            alert(obj.message)
+                        if(obj.code == 0){
+                            alert('选课成功');
                             getAllCourseInformation()
+                        }else {
+                            alert(obj.message)
+                        }
                     },
                     error:function (error) {
                         console.log(error);

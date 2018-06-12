@@ -128,10 +128,6 @@
 	.student-sex{}
 	.student-age{}
 	.student-dept{}
-	a.page-button{
-		border: none;
-	}
-
 	.page-ul{
 	}
 	.page-ul-li{
@@ -164,10 +160,11 @@
                     url:urlStr,
                     dataType:'json',
                     success:function (obj) {
-                        if (obj.code == 1) {
-                            alert('新增失败，主键已存在！')
+                        if (obj.code == 0) {
+                            getAllStudentInformation()
+                            alert('添加成功！')
                         } else {
-                            alert(obj.message)
+                            alert(obj.message);
                         }
                     },
                     error:function (error) {
@@ -266,10 +263,10 @@
                 success:function (obj) {
                     if(obj.code == 0){
                         alert('修改学生信息成功！')
+                        getAllStudentInformation()
                     }
                     else {
                         alert("修改学生信息失败！");
-                        getAllStudentInformation()
                     }
                 },
                 error:function (error) {

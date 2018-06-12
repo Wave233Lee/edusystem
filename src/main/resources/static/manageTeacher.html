@@ -170,10 +170,10 @@
             dataType:'json',
 
             success:function (obj) {
-                if(obj.code == 1){
-                    alert('新增失败，主键已存在！')
-                }else{
+                if(obj.code == 0){
                     getAllTeacherInformation();
+                    alert('添加成功！')
+                }else{
                     alert(obj.message)
                 }
             },
@@ -184,13 +184,6 @@
         })
     }
 }
-    
-
-    function deleteT(obj){
-        var td = $(obj).parent().parent().find('td')
-        $('#modal-deleteteacherId').val(td.eq(0).text())
-
-    }
 
     function deleteTeacher() {
     var teacherId = $('#modal-deleteteacherId').val() 
@@ -222,8 +215,7 @@ function setModifyTeacherInformation(obj) {
     $('#modal-modifyteacherSex').val(td.eq(2).text())
     $('#modal-modifyteacherAge').val(td.eq(3).text())
     $('#modal-modifyteacherDept').val(td.eq(4).text())
-    //$('#modal-modifycoursePlace').val(td.eq(5).text())
-   
+
 }
 
 function modifyTeacher() {
@@ -245,7 +237,7 @@ function modifyTeacher() {
                 alert('修改教师信息成功！')
             }
             else {
-                alert("修改教师信息失败！")
+                alert(obj.message)
             }
         },
         error:function (error) {
