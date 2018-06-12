@@ -28,7 +28,7 @@ public class TCController {
 
 
     /**
-     * 新增——学生选课
+     * 新增——教务处排课
      *
      * @param tc
      * @return

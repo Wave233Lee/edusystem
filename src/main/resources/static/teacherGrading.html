@@ -78,13 +78,6 @@
     	float:left;
     	border:0px solid gray;
     }
-    .add_content{
-    	width:10%;
-    	height:100%;
-    	float:right;
-    	border:0px solid gray;
-
-    }
     .table_body{
     	width:100%;
     	height:60%;
@@ -96,7 +89,6 @@
          height:12%;
          margin-top: 5px;
      }
-
      .backhome{
                 width:15%;
                 float:right;
@@ -106,16 +98,6 @@
 
                 
             }
-    .edit-a:after{
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    width: 2px;
-    height: 13px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #DDDDDD;
-    }
     .operating a{
     text-decoration: none;
     }
@@ -125,25 +107,6 @@
      .student-id{}
 	 .student-name{}
 	 .student-grade{}
-	 a.page-button{
-		 border: none;
-	 }
-	 .caret-right{
-		 border-left: none;
-		 border-right: 6px solid #666;
-		 border-top: 5px solid transparent;
-		 border-bottom: 5px solid transparent;
-	 }
-	 .caret-left{
-		 border-left: 6px solid #666;
-		 border-right: none;
-		 border-top: 5px solid transparent;
-		 border-bottom: 5px solid transparent;
-	 }
-	 #jump-text{
-		 display: inline-block;
-		 vertical-align: middle;
-	 }
 	 .page-ul{
 	 }
 	 .page-ul-li{
@@ -172,14 +135,14 @@
            var studentId=$('#student-id').val();
             var grade = $('#grade').val();
             var urlStr = 'http://154.8.149.148/edu/sc/update?sid='+ studentId + "&cid=" + courseId + "&grade=" + grade;
-             alert(urlStr);
+            // alert(urlStr);
             $.ajax({
                 url:urlStr,
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
                         alert('添加成绩成功！')
-                        getAllCourseInformation()
+                        searchCourseByName()
                     }
                     else {
                         alert("添加成绩失败！");
@@ -199,7 +162,7 @@
             var teacherId=document.cookie;
             var name =$('#search-courseName').val();
             var urlStr = 'http://154.8.149.148/edu/sc/getByCnameAndTidByPage?page='+ page + '&tid='+teacherId+'&cname='+ name + '&size=' + size + '&sortFieldName=' + sortFieldName + '&asc=' + asc;
-              alert(urlStr);
+             // alert(urlStr);
             $.ajax({
                 url:urlStr,
                 dataType:'json',
@@ -218,7 +181,7 @@
             var cname =$('#search-courseName').val();
             var teacherId=document.cookie;
             var urlStr = 'http://154.8.149.148/edu/sc/getByCnameAndSnameAndTid?cname='+cname+'&sname='+sname+'&tid='+ teacherId;
-              alert(urlStr);
+            //  alert(urlStr);
             $.ajax({
                 url:urlStr,
                 dataType:'json',
@@ -278,7 +241,8 @@
 </head>
 <body>
 	<div class="top-body">
-        <div style="width:70%;font-size: 40px;color:#FFFFFF;text-align:left;vertical-align:middle;line-height:100px;margin-left: 10px;float:left">教&nbsp;学&nbsp;服&nbsp;务&nbsp;系&nbsp;统</div>
+        <div style="width:70%;font-size: 45px;color:#FFFFFF;text-align:left;vertical-align:middle;line-height:100px;margin-top: 20px;margin-left: 4%;float:left;">教&nbsp;&nbsp;学&nbsp;&nbsp;服&nbsp;&nbsp;务&nbsp;&nbsp;系&nbsp;&nbsp;统
+        </div>
         <div style="width:20%;height:30px;font-size:20px;color:#FFFFFF;float:right;margin-top: 50px;">
             欢迎&nbsp;&nbsp;<span id="userId">fuck</span>&nbsp;&nbsp;!
         </div>
@@ -317,10 +281,28 @@
 		<div class="main_content">
 			<div class="top_content">
                 <div class="search">
-                    <div style="width:25%;border:0px solid gray;float:left">
+                    <div class="row show-grid">
+                        <div class="col col-sm-3">
+                            <input style="height:38px;width: 150px" type="text"  id="search-courseName" placeholder="请输入课程名称">
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <button type="button" class="btn btn-default" onclick="searchCourseByName()">搜索课程</button>
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <input style="height:38px;width: 150px" type="text"  id="search-studentName" placeholder="请输入学生姓名">
+
+                        </div>
+                        <div class="col col-sm-3">
+                            <button type="button" class="btn btn-default" onclick="searchStudentByName()">搜索学生</button>
+
+                        </div>
+                    </div>
+                <!--    <div style="width:20%;border:0px solid gray;float:left">
                         <input style="height:38px" type="text"  id="search-courseName" placeholder="请输入课程名称">
                     </div>
-                    <div style="width:15%;border:0px solid gray;float:left">
+                    <div style="width:15%;margin-left:20px;border:0px solid gray;float:left">
                     <button type="button" class="btn btn-default" onclick="searchCourseByName()">搜索课程</button>
                     </div>
                     <div style="width:25%;border:0px solid gray;float:left">
@@ -329,6 +311,7 @@
                     <div style="width:35%;border:0px solid gray;float:right">
                          <button type="button" class="btn btn-default" onclick="searchStudentByName()">搜索学生</button>
                     </div>
+                    -->
                 </div>
 			</div>
 			<hr/>
@@ -451,7 +434,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<button type="button" onclick="insertGrade()" class="btn btn-primary">
+				<button type="button" onclick="insertGrade()" class="btn btn-primary" data-dismiss="modal">
 					提交更改
 				</button>
 			</div>

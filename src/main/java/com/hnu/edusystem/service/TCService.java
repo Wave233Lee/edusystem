@@ -35,7 +35,7 @@ public class TCService {
      * @param tc
      * @return
      */
-    public TC save(String tname, String cname) {
+    public TC save(String cname, String tname) {
 
         // 验证是否存在
         if (tname == null || cname == null || tcRepository.findByTidAndCid(tname, cname) != null) {
@@ -44,17 +44,18 @@ public class TCService {
 
 
         TC tc = new TC();
-        if(teacherRepository.findOne(tname) == null){
+        if(courseRepository.findByName(cname) == null){
             throw new EduException(EnumExceptions.FAILED_COURSE_NOT_EXIST);
         }
-        tc.setTid(tname);
-        tc.setTname(teacherRepository.findOne(tname).getName());
+        tc.setCname(cname);
+        tc.setCid(courseRepository.findByName(cname).getId());
 
-        if(courseRepository.findOne(cname) == null){
+        if(teacherRepository.findByName(tname) == null){
             throw new EduException(EnumExceptions.FAILED_TEACHER_NOT_EXIST);
         }
-        tc.setCid(cname);
-        tc.setCname(courseRepository.findOne(cname).getName());
+        tc.setTname(tname);
+        tc.setTid(teacherRepository.findByName(tname).getId());
+
 
         return tcRepository.save(tc);
     }

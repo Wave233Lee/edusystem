@@ -23,71 +23,61 @@
             html,body{
                 width: 100%;
                 height: 100%;               
-        		background-color: #EEE0E5;
+        		background-image: url("imgs/homebg.png");
+                background-size: 100%100%;
         	}
         	.div-mid{
-        		background-color: #FFFFFF;	
         		height:100%;
         		border:1px solid gray;
                 margin:0;
-        	}
+                background: rgba(225,225,225,0.25);
+            }
         	.div-top{
-        		background-color:red;
         		width:100%;
         		height:15%;
                 text-align: center;
                 line-height: 80px;
-                font-size: 36px;
-                color:#FFFFFF;
+                font-size: 60px;
+                color: #000000;
         		border:0px solid gray;
+                margin-top: 2%;
+                font-family: 华文行楷;
         	}
         	.main-content{
         		width:100%;
-        		height:60%;
+        		height:30%;
         		border:0px solid gray;
-        	}
-        	.div-bottom{
-        		width:100%;
-        		height:25%;
-        		border:0px solid gray;
-        	}
-        	.left-body{
-        		
-        		width:74%;
-        		height:100%;
-        		float:left;
-        		border:0px solid gray;
-
+                margin-top: 4%;
         	}
         	.right-body{
-        		background-image: url("imgs/login_bg.gif");
-        		background-size: 100% 100%;
-        		background-repeat: no-repeat;
-        		width:25%;
+                background-color: rgba(255, 255, 255, 0.8);
+        		width:20%;
         		height:100%;
         		float:right;
         		border:0px solid gray;
-        		
-        	}
+                margin-right: 10%;
+
+            }
         	.right-body1{
         		width:100%;
-        		height:18%;
+        		height:12%;
         		border:0px solid gray;
-        		
+
         	}
         	.right-body2{
         		width:100%;
         		height:82%;	
                 padding:5px;
+                float: left;
         		border:0px solid gray;
-        		
-        	}
+                margin-left: 7%;
+
+            }
         	
     	</style>
     	<script type="text/javascript">
             $(document).ready(function () {
             });
-
     		function getAdd(){
     			var obj = document.getElementById("way"); //定位select
 				var index = obj.selectedIndex; // 选中索引
@@ -105,7 +95,7 @@
                         async:false,
                         success:function (obj) {
                             if(obj.code === 0){
-                                document.cookie=uname;
+                                document.cookie = uname;
                                 var f=document.getElementById("myform");
                                 f.action="jwManager.html";
                                 f.submit()
@@ -132,7 +122,7 @@
                          async:false,
                             success:function (obj) {
                                 if(obj.code === 0){
-                                    document.cookie=uname;
+                                    document.cookie = uname;
                                     var f=document.getElementById("myform");
                                     f.action="jwTeacher.html";
                                     f.submit()
@@ -157,8 +147,8 @@
                          async:false,
                             success:function (obj) {
                                 if(obj.code === 0){
-                                    document.cookie=uname;
-                                       var f=document.getElementById("myform");
+                                    document.cookie = uname;
+                                    var f=document.getElementById("myform");
                                     f.action="jwStudent.html";
                                     f.submit()
                                 }else {
@@ -181,9 +171,6 @@
             教&nbsp;&nbsp;学&nbsp;&nbsp;服&nbsp;&nbsp;务&nbsp;&nbsp;系&nbsp;&nbsp;统
 		</div>
 		<div class="main-content">
-			<div class="left-body">
-				<a href="http://www.hnu.edu.cn/hdgk.htm"><img src="imgs/left.jpg" width="100%" height="100%"></a>
-			</div>
 			<div class="right-body">
 				<div class="right-body1">
 				</div>
@@ -192,10 +179,10 @@
 					<!--<form id="myform" action="jwStudent" onsubmit="getAdd()" method="get">-->
 					<div class="row show-grid">
                         <div class="col-sm-3">
-                            登&nbsp;&nbsp;录&nbsp;&nbsp;方：
+                            用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户：
                         </div>
                         <div class="col-sm-9">
-					       <select id="way" style="width:150px"><option value="manager">管理员</option><option value="teacher">教师</option><option value="student">学生</option></select>
+					       <select id="way" class="selectpicker" style="width:150px"><option value="manager">管理员</option><option value="teacher">教师</option><option value="student">学生</option></select>
                         </div>
                     </div><br>
                     <div class="row show-grid">
@@ -218,18 +205,13 @@
                         <div class="col-sm-3">
                         </div>
                         <div class="col-sm-3">
-                            <input style="width:60px" type="submit"  value="登录">
+                            <button class="btn btn-default" style="width:60px" type="submit">
+                                登陆
+                            </button>
                         </div>
                     </div><br>
 				</form>
 			</div>
-		</div>
-		<div class="div-bottom">
-		<!--	<img src="imgs/link.jpg">
-		<font font-size="15px">友情链接：</font>&nbsp;<input type="button" onclick="getAdd()"><br>
-			<a href="http://jwc.hnu.edu.cn/">教务处</a><br>
-			<a href="http://kczx.hnu.cn/G2S/ShowSystem/Index.aspx">课程中心</a><br>-->
-			<img src="imgs/login_line.gif" width="100%">
 		</div>
 	</div>
     </div>
