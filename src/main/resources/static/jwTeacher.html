@@ -68,8 +68,27 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            var s = window.sessionStorage.getItem("username");
-            document.getElementById("userId").innerHTML=s;
+            var s = window.sessionStorage.getItem("userId");
+            var n = null;
+            var urlStr = 'http://154.8.149.148/edu/teacher/getById?id=' + s;
+            $.ajax({
+                url:urlStr,
+                dataType:'json',
+                async:false,
+                success:function (obj) {
+                    if(obj.code === 0){
+                        n = obj.data.name;
+                    }
+                    else{
+                        alert(obj.message)
+                    }
+                },
+                error:function (error) {
+                    alert("can't connected to server !");
+                    console.log(error)
+                }
+            })
+            document.getElementById("username").innerHTML=n;
         }
     </script>
         
@@ -79,7 +98,7 @@
         <div style="width:70%;font-size: 45px;color:#FFFFFF;text-align:left;vertical-align:middle;line-height:100px;margin-top: 20px;margin-left: 4%;float:left;">教&nbsp;&nbsp;学&nbsp;&nbsp;服&nbsp;&nbsp;务&nbsp;&nbsp;系&nbsp;&nbsp;统
         </div>
         <div style="width:20%;height:30px;font-size:20px;color:#FFFFFF;float:right;margin-top: 50px;">
-            欢迎&nbsp;&nbsp;<span id="userId">fuck</span>&nbsp;&nbsp;!
+            欢迎&nbsp;&nbsp;<span id="username">WTF</span>&nbsp;&nbsp;!
         </div>
         <div class="backhome">
             <div id="top" class="row show-grid">
