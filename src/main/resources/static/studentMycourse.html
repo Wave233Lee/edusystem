@@ -167,8 +167,8 @@
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
-                        alert("退课成功！");
                         getmyCourseInformation()
+                        alert("退课成功！");
                     }else {
                         alert(obj.message)
                     }

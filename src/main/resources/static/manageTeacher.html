@@ -195,8 +195,8 @@
         dataType:'json',
         success:function (obj) {
             if(obj.code == 0){
-                alert("删除信息成功！")
                 getAllTeacherInformation()
+                alert("删除信息成功！")
             }else {
                 alert(obj.message)
             }

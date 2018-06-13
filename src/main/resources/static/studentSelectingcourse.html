@@ -167,8 +167,8 @@
                     success:function (obj) {
                      //   document.getElementById('').className="btn btn-danger″
                         if(obj.code == 0){
+                            getCourseInformation()
                             alert('选课成功');
-                            getAllCourseInformation()
                         }else {
                             alert(obj.message)
                         }

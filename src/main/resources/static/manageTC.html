@@ -164,8 +164,8 @@
                 dataType:'json',
 
                 success:function (obj) {
-                    alert(obj.message);
                     getTCInformation()
+                    alert(obj.message);
                 },
                 error:function (error) {
                     console.log(error);
@@ -190,8 +190,8 @@
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
-                        alert("删除信息成功！");
                         getTCInformation(obj)
+                        alert("删除信息成功！");
                     }else {
                         alert(obj.message)
                     }
@@ -389,7 +389,7 @@
                         <div class="input-group" style="width: 110px">
                             <input type="text" id ="page_num" class="form-control" placeholder="1">
                             <span class="input-group-btn">
-                                <button id="jump-button" class="btn btn-default" onclick="getCourseInformation()" type="button">跳转</button>
+                                <button id="jump-button" class="btn btn-default" onclick="getTCInformation()" type="button">跳转</button>
                              </span>
                         </div>
                     </li>

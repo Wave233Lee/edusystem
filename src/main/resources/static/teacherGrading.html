@@ -142,8 +142,8 @@
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
+                        searchCourseByName();
                         alert('添加成绩成功！')
-                        searchCourseByName()
                     }
                     else {
                         alert("添加成绩失败！");
@@ -160,7 +160,7 @@
             var size = 4;
             var sortFieldName = 'id';
             var asc = 1;
-            var teacherId=s;
+            var teacherId = s;
             var name =$('#search-courseName').val();
             var urlStr = 'http://154.8.149.148/edu/sc/getByCnameAndTidByPage?page='+ page + '&tid='+teacherId+'&cname='+ name + '&size=' + size + '&sortFieldName=' + sortFieldName + '&asc=' + asc;
              // alert(urlStr);

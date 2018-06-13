@@ -226,8 +226,8 @@
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
-                        alert("删除信息成功！");
                         getAllStudentInformation()
+                        alert("删除信息成功！");
                     }else {
                         alert(obj.message)
                     }
@@ -262,8 +262,8 @@
                 dataType:'json',
                 success:function (obj) {
                     if(obj.code == 0){
-                        alert('修改学生信息成功！')
                         getAllStudentInformation()
+                        alert('修改学生信息成功！')
                     }
                     else {
                         alert("修改学生信息失败！");
