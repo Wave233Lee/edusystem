@@ -73,6 +73,10 @@
         //   var s=a[0];
            var s = window.sessionStorage.getItem("userId");
            document.getElementById("userId").innerHTML=s;
+           if(s == null){
+               alert('未登录');
+               window.location.href="jwIndex.html"
+           }
         }
 
         </script>

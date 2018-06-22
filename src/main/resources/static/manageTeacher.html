@@ -186,7 +186,7 @@
 }
     function deleteT(obj){
         var td = $(obj).parent().parent().find('td');
-        $('#modal-deletestudentId').val(td.eq(0).text());
+        $('#modal-deleteteacherId').val(td.eq(0).text());
     }
     function deleteTeacher() {
     var teacherId = $('#modal-deleteteacherId').val() 
@@ -317,6 +317,10 @@ function modifyTeacher() {
         window.onload=function(){
             var s = window.sessionStorage.getItem("userId");
             document.getElementById("userId").innerHTML=s;
+            if(s == null){
+                alert('未登录');
+                window.location.href="jwIndex.html"
+            }
         }
     </script>
 
