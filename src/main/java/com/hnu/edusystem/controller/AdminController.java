@@ -4,6 +4,8 @@ import com.hnu.edusystem.domain.Admin;
 import com.hnu.edusystem.domain.Result;
 import com.hnu.edusystem.service.AdminService;
 import com.hnu.edusystem.utils.ResultUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ import java.util.List;
  * @Author: WaveLee
  * @Date: 2018/6/5 23:01
  */
+@Api(tags = {"管理员接口"})
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -33,6 +36,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/add")
+    @ApiOperation(value="添加管理员信息",notes="id主键自增长")
     public Result<Admin> add(@Valid Admin admin, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
