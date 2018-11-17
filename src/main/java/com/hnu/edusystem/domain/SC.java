@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-//@IdClass(value = SCPK.class)
 public class SC{
 
 //   private static final long serialVersionUID = 1L;

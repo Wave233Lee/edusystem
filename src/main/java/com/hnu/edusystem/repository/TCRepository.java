@@ -1,6 +1,5 @@
 package com.hnu.edusystem.repository;
 
-import com.hnu.edusystem.domain.SCPK;
 import com.hnu.edusystem.domain.TC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -141,4 +141,8 @@ public class LoginService {
         Pageable pageable = new PageRequest(page, size, sort);
         return loginRepository.findAll(pageable);
     }
+
+    public Login selectByAccount(String account) {
+        return loginRepository.findById(account);
+    }
 }

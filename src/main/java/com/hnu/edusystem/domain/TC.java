@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-//@IdClass(value = TCPK.class)
 public class TC  {
     @Id
     @JsonIgnore
